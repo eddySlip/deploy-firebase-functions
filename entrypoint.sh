@@ -19,7 +19,5 @@ else
     DEPLOY_OPTION="--only functions"
 fi
 
-firebase deploy \
-    -m "${GITHUB_REF} (${GITHUB_SHA})" \
-    --project "${FIREBASE_PROJECT}" \
-    ${DEPLOY_OPTION}
+firebase use $FIREBASE_PROJECT
+firebase deploy $DEPLOY_OPTION
