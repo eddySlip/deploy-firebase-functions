@@ -12,7 +12,14 @@ if [ -z "${FIREBASE_PROJECT}" ]; then
     exit 1
 fi
 
+# Check if FUNCTION_TO_DEPLOY is set
+if [ -n "${FUNCTION_TO_DEPLOY}" ]; then
+    DEPLOY_OPTION="--only functions:${FUNCTION_TO_DEPLOY}"
+else
+    DEPLOY_OPTION="--only functions"
+fi
+
 firebase deploy \
     -m "${GITHUB_REF} (${GITHUB_SHA})" \
-    --project ${FIREBASE_PROJECT} \
-    --only functions
+    --project "${FIREBASE_PROJECT}" \
+    ${DEPLOY_OPTION}
